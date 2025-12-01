@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>The Bag Room — Luxury Second Hand</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- FONTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --bg:#f5f4f2;
+      --surface:#ffffff;
+      --text:#000000;
+      --muted:#333333;
+      --line:#e4e1db;
+      --gold:#d3c19a;
+      --radius:18px;
+      --max:980px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system;
+      line-height:1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* HEADER */
+    .topbar{
+      background:#ffffff;
+      border-bottom:1px solid var(--line);
+      padding:24px 20px 16px;
+      position:sticky;
+      top:0;
+      z-index:20;
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      text-align:center;
+      position:relative;
+    }
+
+    /* ÍCONES */
+    .social{
+      position:absolute;
+      right:0;
+      top:10px;
+      display:flex;
+      gap:14px;
+    }
+
+    .social a{
+      background:#fff;
+      border-radius:999px;
+      padding:5px;
+      border:1px solid #ddd;
+      box-shadow:0 3px 10px rgba(0,0,0,.05);
+      transition:.2s;
+    }
+
+    .social img{
+      width:24px;
+      height:24px;
+    }
+
+    .social a:hover{
+      transform:translateY(-2px);
+      opacity:.75;
+    }
+
+    /* LOGO */
+    .logo{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.32em;
+      text-transform:uppercase;
+      font-size:clamp(30px,6vw,46px);
+      color:#000;
+    }
+
+    .tag{
+      text-transform:uppercase;
+      letter-spacing:.48em;
+      font-size:11px;
+      color:#444;
+      margin-bottom:16px;
+    }
+
+    /* MINI QUADRO DO VÍDEO */
+    .mini-vitrine{
+      margin: 8px auto 10px;
+      width: 210px;
+      height: 130px;
+      border-radius: 16px;
+      overflow:hidden;
+      border:1px solid var(--gold);
+      box-shadow:0 8px 22px rgba(0,0,0,.25);
+    }
+
+    .mini-video-frame iframe{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    /* PAGE */
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:36px 20px 90px;
+    }
+
+    .grid{
+      display:grid;
+      gap:26px;
+    }
+
+    @media(min-width:900px){
+      .grid{ grid-template-columns:1.2fr .9fr; }
+    }
+
+    /* CARD */
+    .card{
+      background:var(--surface);
+      border:1px solid var(--gold);
+      border-radius:var(--radius);
+      padding:26px 24px 24px;
+      box-shadow:0 8px 26px rgba(0,0,0,.06);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card-inner{ position:relative; z-index:2; }
+
+    h2{
+      font-family:"Playfair Display";
+      font-size:clamp(22px,3.2vw,30px);
+      color:#000;
+    }
+
+    p{ font-size:17px; }
+    .muted{ color:var(--muted); }
+
+    .sep{
+      width:70px;height:2px;
+      background:var(--gold);
+      border-radius:999px;
+      margin:12px 0 14px;
+    }
+
+    /* BUTTONS */
+    .buttons{
+      display:grid;
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 18px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:15px;
+      cursor:pointer;
+      transition:.2s;
+      border:1px solid transparent;
+    }
+
+    .btn-primary{
+      background:#000;
+      color:#fff;
+      border-color:#000;
+    }
+
+    .btn-outline{
+      background:#fff;
+      color:#000;
+      border-color:#ccc;
+    }
+
+    .btn-outline:hover{
+      background:#fdfbf8;
+      border-color:#a8925f;
+      transform:translateY(-2px);
+    }
+
+    /* WHATS FLOAT */
+    .chat-whats{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      background:#25D366;
+      padding:12px 16px;
+      color:#fff;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 14px 30px rgba(0,0,0,.25);
+    }
+
+    .chat-whats svg{
+      width:23px;
+      height:23px;
+      fill:#fff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="topbar-inner">
+
+      <div class="social">
+        <a href="https://instagram.com/thebagroom.br" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+        </a>
+        <a href="https://tiktok.com/@thebagroom.br" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg">
+        </a>
+      </div>
+
+      <div class="logo">THE BAG ROOM</div>
+      <div class="tag">SECOND HAND</div>
+
+      <!-- MINI VÍDEO -->
+      <div class="mini-vitrine">
+        <div class="mini-video-frame">
+          <iframe
+            src="https://www.instagram.com/reel/DQ4wjzrCV7N/embed"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page">
+    <section class="grid">
+
+      <article class="card">
+        <div class="card-inner">
+
+          <p>
+            Na The Bag Room, re-significamos o conceito de “novo”.
+            Selecionamos peças de luxo com curadoria criteriosa e autenticidade garantida.
+          </p>
+
+          <h2>Nossa missão</h2>
+          <div class="sep"></div>
+
+          <p class="muted">
+            Celebrar o luxo sustentável, oferecendo peças que inspiram estilo e carregam história.
+          </p>
+
+          <div class="buttons">
+            <a class="btn btn-primary" href="https://wa.me/5513996904227" target="_blank">WhatsApp — Compras & Dúvidas</a>
+            <a class="btn btn-outline" href="https://chat.whatsapp.com/J9gxW9Whk778OKfLGnjoWN" target="_blank">Entrar no Grupo VIP</a>
+            <a class="btn btn-outline" href="#desapego">Desapegue sua bolsa</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="desapego">
+        <div class="card-inner">
+          <h2>Como desapegar suas peças</h2>
+
+          <div class="steps">
+            <div class="step">
+              <div class="num">1</div>
+              <div>
+                <strong>Entre em contato</strong>
+                <p class="muted">Envie fotos e informações básicas da peça.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">2</div>
+              <div>
+                <strong>Autenticidade & Conservação</strong>
+                <p class="muted">A peça precisa ser autêntica e estar em bom estado.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">3</div>
+              <div>
+                <strong>Fotos profissionais</strong>
+                <p class="muted">Realizamos fotos no padrão The Bag Room.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">4</div>
+              <div>
+                <strong>Venda & repasse</strong>
+                <p class="muted">Repasse até 7 dias após a venda.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="buttons" style="margin-top:16px;">
+            <a class="btn btn-primary" href="https://wa.me/5513996904227" target="_blank">Enviar fotos para avaliação</a>
+          </div>
+
+        </div>
+      </article>
+
+    </section>
+
+    <footer style="text-align:center; margin-top:42px; font-size:12px; color:#777;">
+      © <span id="year"></span> The Bag Room · WhatsApp (13) 99690-4227
+    </footer>
+
+    <a class="chat-whats" href="https://wa.me/5513996904227" target="_blank">
+      <svg viewBox="0 0 32 32"><path d="M19.11 17.52c..."/></svg>
+      <span>Fale com a The Bag Room</span>
+    </a>
+
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+
+
