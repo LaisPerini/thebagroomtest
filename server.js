@@ -11,7 +11,7 @@ app.post("/frete", async (req, res) => {
 
   try {
 
-    const response = await fetch("https://api.melhorenvio.com.br/api/v2/me/shipment/calculate", {
+    const response = await fetch("https://melhorenvio.com.br/api/v2/me/shipment/calculate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
