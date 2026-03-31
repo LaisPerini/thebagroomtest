@@ -48,7 +48,7 @@ app.post("/frete", async (req, res) => {
           height: 10,
           length: 30,
           weight: 1,
-          insurance_value: 2000, // ⚠️ obrigatório
+          insurance_value: 500, // ⚠️ obrigatório
           quantity: 1
         }]
       })
