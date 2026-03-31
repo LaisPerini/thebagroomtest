@@ -38,13 +38,17 @@ app.post("/frete", async (req, res) => {
       body: JSON.stringify({
         from: { postal_code: "11060003" }, // seu CEP origem
         to: { postal_code: cepLimpo },
+        options: {
+  receipt: false,
+  own_hand: false
+},
         products: [{
           id: "1",
-          width: 20,
+          width: 25,
           height: 10,
-          length: 25,
+          length: 30,
           weight: 1,
-          insurance_value: 1000, // ⚠️ obrigatório
+          insurance_value: 2000, // ⚠️ obrigatório
           quantity: 1
         }]
       })
