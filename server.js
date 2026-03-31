@@ -44,7 +44,7 @@ app.post("/frete", async (req, res) => {
 },
         products: [{
           id: "1",
-          width: 25,
+          width: 30,
           height: 10,
           length: 30,
           weight: 1,
