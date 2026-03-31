@@ -12,6 +12,10 @@ const TOKEN = process.env.TOKEN; // 🔒 seguro
 app.post("/frete", async (req, res) => {
 
   const { cep } = req.body;
+  
+
+// limpa o CEP (remove hífen e espaços)
+const cepLimpo = cep.replace(/\D/g, '');
 
   try {
 
