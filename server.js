@@ -36,7 +36,7 @@ app.post("/frete", async (req, res) => {
         "Authorization": `Bearer ${TOKEN}`
       },
       body: JSON.stringify({
-        from: { postal_code: "11000000" }, // seu CEP origem
+        from: { postal_code: "11060003" }, // seu CEP origem
         to: { postal_code: cepLimpo },
         products: [{
           id: "1",
