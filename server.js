@@ -7,17 +7,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const TOKEN = process.env.TOKEN; // 🔒 seguro
+// 🔒 pega o token do Render (Environment)
+const TOKEN = process.env.TOKEN;
 
+// rota de teste
+app.get("/", (req, res) => {
+  res.send("Backend rodando 🚀");
+});
+
+// rota do frete
 app.post("/frete", async (req, res) => {
 
-  const { cep } = req.body;
-  
-
-// limpa o CEP (remove hífen e espaços)
-const cepLimpo = cep.replace(/\D/g, '');
-
   try {
+
+    let { cep } = req.body;
+
+    if (!cep) {
+      return res.status(400).json({ error: "CEP não informado" });
+    }
+
+    // 🔥 limpa o CEP (remove hífen, espaço, etc)
+    const cepLimpo = cep.replace(/\D/g, '');
 
     const response = await fetch("https://www.melhorenvio.com.br/api/v2/me/shipment/calculate", {
       method: "POST",
@@ -26,32 +36,42 @@ const cepLimpo = cep.replace(/\D/g, '');
         "Authorization": `Bearer ${TOKEN}`
       },
       body: JSON.stringify({
-        from: { postal_code: "11000-000" },
-        to: { postal_code: cep },
+        from: { postal_code: "11000000" }, // seu CEP origem
+        to: { postal_code: cepLimpo },
         products: [{
           id: "1",
           width: 20,
           height: 10,
           length: 25,
-          weight: 1
+          weight: 1,
+          insurance_value: 1000, // ⚠️ obrigatório
+          quantity: 1
         }]
       })
     });
 
     const data = await response.json();
 
+    // 🔍 debug (se precisar ver erro real)
+    console.log("Resposta Melhor Envio:", data);
+
+    // valida retorno
+    if (!data || data.length === 0) {
+      return res.status(404).json({ error: "Nenhum frete encontrado" });
+    }
+
     res.json(data);
 
   } catch (error) {
+    console.error("Erro no servidor:", error);
     res.status(500).json({ error: "Erro ao calcular frete" });
   }
 
 });
 
-app.get("/", (req, res) => {
-  res.send("Backend rodando 🚀");
-});
+// ⚠️ porta obrigatória do Render
+const PORT = process.env.PORT || 10000;
 
-app.listen(10000, () => {
-  console.log("Rodando...");
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
