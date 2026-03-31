@@ -34,7 +34,7 @@ app.post("/frete", async (req, res) => {
 
     const data = await response.json();
 
-    console.log("RESPOSTA FRETE:", data);
+console.log("RESPOSTA FRETE:", JSON.stringify(data, null, 2));
 
     res.json(data);
 
