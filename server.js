@@ -1,54 +1,29 @@
 import express from "express";
 import fetch from "node-fetch";
-import cors from "cors";
 
 const app = express();
-
-app.use(cors());
 app.use(express.json());
 
-// 🔒 pega o token do Render (Environment)
-const TOKEN = process.env.TOKEN;
-
-// rota de teste
-app.get("/", (req, res) => {
-  res.send("Backend rodando 🚀");
-});
-
-// rota do frete
 app.post("/frete", async (req, res) => {
 
   try {
 
-    let { cep } = req.body;
-
-    if (!cep) {
-      return res.status(400).json({ error: "CEP não informado" });
-    }
-
-    // 🔥 limpa o CEP (remove hífen, espaço, etc)
-    const cepLimpo = cep.replace(/\D/g, '');
-
-    const response = await fetch("https://www.melhorenvio.com.br/api/v2/me/shipment/calculate", {
+    const response = await fetch("https://sandbox.melhorenvio.com.br/api/v2/me/shipment/calculate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${TOKEN}`
+        "Authorization": "Bearer SEU_TOKEN_AQUI"
       },
       body: JSON.stringify({
-        from: { postal_code: "11060003" }, // seu CEP origem
-        to: { postal_code: cepLimpo },
-        options: {
-  receipt: false,
-  own_hand: false
-},
+        from: { postal_code: "11060-003" },
+        to: { postal_code: req.body.to.postal_code },
         products: [{
           id: "1",
           width: 30,
           height: 10,
           length: 30,
           weight: 1,
-          insurance_value: 500, // ⚠️ obrigatório
+          insurance_value: 500, // 🔥 ESSENCIAL
           quantity: 1
         }]
       })
@@ -56,26 +31,17 @@ app.post("/frete", async (req, res) => {
 
     const data = await response.json();
 
-    // 🔍 debug (se precisar ver erro real)
-    console.log("Resposta Melhor Envio:", data);
-
-    // valida retorno
-    if (!data || data.length === 0) {
-      return res.status(404).json({ error: "Nenhum frete encontrado" });
-    }
+    console.log("RESPOSTA FRETE:", data);
 
     res.json(data);
 
   } catch (error) {
-    console.error("Erro no servidor:", error);
-    res.status(500).json({ error: "Erro ao calcular frete" });
+    console.log(error);
+    res.status(500).json({ error: "Erro no frete" });
   }
 
 });
 
-// ⚠️ porta obrigatória do Render
-const PORT = process.env.PORT || 10000;
-
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+app.listen(10000, () => {
+  console.log("Servidor rodando na porta 10000");
 });
