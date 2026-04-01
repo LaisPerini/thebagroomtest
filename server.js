@@ -48,3 +48,12 @@ console.log("RESPOSTA FRETE:", JSON.stringify(data, null, 2));
 app.listen(10000, () => {
   console.log("Servidor rodando na porta 10000");
 });
+
+app.get("/datas", (req, res) => {
+
+  res.json([
+    { inicio: "2026-04-05", fim: "2026-04-10" },
+    { inicio: "2026-04-15", fim: "2026-04-18" }
+  ]);
+
+});
