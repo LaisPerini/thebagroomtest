@@ -49,11 +49,17 @@ app.listen(10000, () => {
   console.log("Servidor rodando na porta 10000");
 });
 
-app.get("/datas", (req, res) => {
+app.get("/datas/:bolsaId", (req, res) => {
 
-  res.json([
-    { inicio: "2026-04-05", fim: "2026-04-10" },
-    { inicio: "2026-04-15", fim: "2026-04-18" }
-  ]);
+  const bolsaId = req.params.bolsaId;
+
+  const alugueis = [
+    { bolsa_id: "serpenti-verde", inicio: "2026-04-05", fim: "2026-04-10" },
+    { bolsa_id: "chanel-classic", inicio: "2026-04-08", fim: "2026-04-12" }
+  ];
+
+  const filtrado = alugueis.filter(a => a.bolsa_id === bolsaId);
+
+  res.json(filtrado);
 
 });
